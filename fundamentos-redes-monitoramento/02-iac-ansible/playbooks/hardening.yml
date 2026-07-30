@@ -1,0 +1,19 @@
+---
+- name: Playbook de Hardening de Sistema
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Desabilitar o protocolo SSH v1 e garantir configuracoes seguras
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+        state: present
+    
+    - name: Assegurar permissoes restritas no arquivo /etc/shadow
+      file:
+        path: /etc/shadow
+        mode: '0600'
+        owner: root
+        group: root

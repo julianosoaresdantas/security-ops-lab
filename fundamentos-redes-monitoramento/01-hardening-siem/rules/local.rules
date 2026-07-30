@@ -1,0 +1,2 @@
+# Regra personalizada do Suricata para detectar varreduras de portas ou tráfego suspeito
+alert tcp any any -> any any (msg:"ALERTA-SURICATA: Possivel varredura ou trafego suspeito detectado"; flags:S; threshold: type threshold, track by_src, count 5, seconds 60; sid:1000001; rev:1;)
